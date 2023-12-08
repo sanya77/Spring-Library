@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All</title>
+</head>
+<body>
+<H2>Добро пожаловать в библиотеку =)</H2>
+<H3>Здесь представлены все наши книги. Приятного чтения!</H3>
+
+<div th:each="book : ${allBook}">
+    <a th:href="@{/book/{id}(id=${book.getId()})}"
+       th:text="${book.getNameBook() + ' ' + book.getAuthor() + ' ' + book.getReleaseBook()}"></a>
+
+</div>
+<br>
+<a th:href="@{/book/newBook}" > <input type="submit" value="Добавить новую книгу"></a>
+</body>
+</html>
