@@ -1,6 +1,8 @@
 package ru.travin.spring.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Person")
@@ -16,6 +18,8 @@ public class Person {
     private String surname;
     @Column(name = "age")
     private int age;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
+    public List<Book> books;
 
     public Person(int id, String name, String surname, int age) {
         this.id = id;
@@ -25,7 +29,16 @@ public class Person {
 
     }
 
+
     public Person() {
+    }
+
+    public void addBookPerson(Book book){
+        if(books == null){
+            books = new ArrayList<>();
+        }
+        books.add(book);
+        book.setPerson(this);
     }
 
     public int getId() {
@@ -58,5 +71,24 @@ public class Person {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", age=" + age +
+                ", books=" + books +
+                '}';
     }
 }

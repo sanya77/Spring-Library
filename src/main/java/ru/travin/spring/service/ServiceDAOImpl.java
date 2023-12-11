@@ -9,11 +9,13 @@ import ru.travin.spring.entity.Book;
 import ru.travin.spring.entity.Person;
 
 import java.util.List;
+
 @Service
-public class ServiceDAOImpl implements ServiceDAO{
+public class ServiceDAOImpl implements ServiceDAO {
 
     private PersonDAO personDAO;
     private BookDAO bookDAO;
+
     @Autowired
     public ServiceDAOImpl(PersonDAO personDAO, BookDAO bookDAO) {
         this.personDAO = personDAO;
@@ -35,19 +37,19 @@ public class ServiceDAOImpl implements ServiceDAO{
     @Override
     @Transactional
     public void savePerson(Person person) {
-    personDAO.savePerson(person);
+        personDAO.savePerson(person);
     }
 
     @Override
     @Transactional
     public void updatePerson(int id, Person updateperson) {
-    personDAO.updatePerson(id, updateperson);
+        personDAO.updatePerson(id, updateperson);
     }
 
     @Override
     @Transactional
     public void deletePerson(int id) {
-    personDAO.deletePerson(id);
+        personDAO.deletePerson(id);
     }
 
     @Override
@@ -65,23 +67,30 @@ public class ServiceDAOImpl implements ServiceDAO{
     @Override
     @Transactional
     public void saveBook(Book book) {
-    bookDAO.saveBook(book);
+        bookDAO.saveBook(book);
     }
 
     @Override
     @Transactional
     public void updateBook(int id, Book book) {
-    bookDAO.updateBook(id, book);
+        bookDAO.updateBook(id, book);
     }
 
     @Override
     @Transactional
     public void deleteBook(int id) {
-    bookDAO.deleteBook(id);
+        bookDAO.deleteBook(id);
     }
 
+    //    @Override
+//    @Transactional
+//    public Object testNPlus1() {
+//    personDAO.testNPlus1();
+//        return null;
+//    }
     @Override
-    public List<Book> getBookByPersonId(int id) {
-        return personDAO.getBookByPersonId(id);
+    @Transactional
+    public List<Book> getBookIdPerson(int id) {
+    return personDAO.getBookIdPerson(id);
     }
 }

@@ -1,6 +1,7 @@
 package ru.travin.spring.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Book")
@@ -13,8 +14,11 @@ public class Book {
     private String nameBook;
     @Column(name = "author")
     private String author;
-    @Column(name = "yearofbook")
+    @Column(name = "releasebook")
     private int releaseBook;
+    @ManyToOne
+    @JoinColumn(name = "person_id", referencedColumnName = "id")
+    private Person person;
 
     public Book(int id, String nameBook, String author, int releaseBook) {
         this.id = id;
@@ -56,5 +60,25 @@ public class Book {
 
     public void setReleaseBook(int releaseBook) {
         this.releaseBook = releaseBook;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public List<Book> setPerson(Person person) {
+        this.person = person;
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", nameBook='" + nameBook + '\'' +
+                ", author='" + author + '\'' +
+                ", releaseBook=" + releaseBook +
+                ", person=" + person +
+                '}';
     }
 }

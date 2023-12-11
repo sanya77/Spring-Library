@@ -4,7 +4,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 import ru.travin.spring.entity.Book;
 import ru.travin.spring.entity.Person;
 
@@ -14,7 +13,6 @@ import java.util.List;
 public class PersonDAOImpl implements PersonDAO {
 
     @Autowired
-    private BookDAO bookDAO;
     private final SessionFactory sessionFactory;
 
     @Autowired
@@ -57,10 +55,16 @@ public class PersonDAOImpl implements PersonDAO {
         session.delete(session.get(Person.class, id));
     }
 
-    public List<Book> getBookByPersonId(int id) {
+public List<Book> getBookIdPerson(int id){
         Session session = sessionFactory.getCurrentSession();
 
-        return session.createQuery("from Book where personBook=?", Book.class).getResultList();
-    }
+//        List<Person> personList = session.createQuery("select p from Person p LEFT JOIN FETCH p.books", Person.class).getResultList();
+        List<Book> bookList = session.createQuery("select b from Book b LEFT JOIN FETCH b.person", Book.class).getResultList();
+        Person result = null;
+        for(Book book : bookList){
+            result = book.getPerson();
+        }
+        return result.getBooks();
+}
 
 }

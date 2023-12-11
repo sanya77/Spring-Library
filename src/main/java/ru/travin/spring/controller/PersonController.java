@@ -28,8 +28,9 @@ public class PersonController {
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model){
         model.addAttribute("person", serviceDAO.getPerson(id));
-//        model.addAttribute("books", serviceDAO.getBookByPersonId(id));
+        model.addAttribute("books", serviceDAO.getBookIdPerson(id));
 
+//        serviceDAO.testNPlus1();
         return "person/show-person";
     }
 
