@@ -5,9 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.travin.spring.entity.Book;
+import ru.travin.spring.entity.Person;
 import ru.travin.spring.service.ServiceDAO;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/book")
@@ -31,6 +30,7 @@ public class BookController {
     @GetMapping("{id}")
     public String getBook(@PathVariable("id") int id, Model model) {
         model.addAttribute("book", serviceDAO.getBook(id));
+//        Optional<Person> bookOwner = serviceDAO.getBookOwner(id);
         return "book/show-book";
     }
 

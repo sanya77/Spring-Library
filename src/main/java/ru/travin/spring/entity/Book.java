@@ -13,7 +13,7 @@ public class Book {
     private String nameBook;
     @Column(name = "author")
     private String author;
-    @Column(name = "releasebook")
+    @Column(name = "yearofbook")
     private int releaseBook;
 
     public Book(int id, String nameBook, String author, int releaseBook) {

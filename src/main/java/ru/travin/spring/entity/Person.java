@@ -14,17 +14,15 @@ public class Person {
     private String name;
     @Column(name = "surname")
     private String surname;
-    @Column(name = "department")
-    private String department;
-    @Column(name = "salary")
-    private int salary;
+    @Column(name = "age")
+    private int age;
 
-    public Person(int id, String name, String surname, String department, int salary) {
+    public Person(int id, String name, String surname, int age) {
         this.id = id;
         this.name = name;
         this.surname = surname;
-        this.department = department;
-        this.salary = salary;
+        this.age = age;
+
     }
 
     public Person() {
@@ -54,19 +52,11 @@ public class Person {
         this.surname = surname;
     }
 
-    public String getDepartment() {
-        return department;
+    public int getAge() {
+        return age;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
-    public int getSalary() {
-        return salary;
-    }
-
-    public void setSalary(int salary) {
-        this.salary = salary;
+    public void setAge(int age) {
+        this.age = age;
     }
 }

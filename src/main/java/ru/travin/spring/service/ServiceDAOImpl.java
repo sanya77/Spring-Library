@@ -79,4 +79,9 @@ public class ServiceDAOImpl implements ServiceDAO{
     public void deleteBook(int id) {
     bookDAO.deleteBook(id);
     }
+
+    @Override
+    public List<Book> getBookByPersonId(int id) {
+        return personDAO.getBookByPersonId(id);
+    }
 }

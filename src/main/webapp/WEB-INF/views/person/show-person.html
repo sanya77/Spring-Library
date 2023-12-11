@@ -7,11 +7,24 @@
 <body>
 <H2>Подробная информация о читателе!</H2>
 
+<!--<div th:if="${books.isEmpty()}">-->
+<!--    <p>Человек пока что не взял ни одной книги!</p>-->
+<!--    <hr/>-->
+<!--</div>-->
+
+<!--<div th:if="${!books.isEmpty()}">-->
+<!--    <hr/>-->
+<!--    <b>Книги:</b>-->
+<!--    <br/>-->
+<!--    <table th:each="book : ${books}">-->
+<!--        <tr th:text="${book.getNameBook() + ', ' + book.getAuthor() + ', ' + book.getReleaseBook()}"></tr>-->
+<!--    </table>-->
+<!--</div>-->
+
 
 <p th:text="${'Имя: ' + person.getName()}">VALUE></p>
 <p th:text="${'Фамилия: ' + person.getSurname()}">VALUE</p>
-<p th:text="${'Департамент: ' + person.getDepartment()}">VALUE</p>
-<p th:text="${'Зарплата: ' + person.getSalary()}">VALUE</p>
+<p th:text="${'Возраст: ' + person.getAge()}">VALUE</p>
 
 <a th:href="@{/people/{id}/edit(id=${person.getId()})}"><input type="submit" value="Редактировать"></a>
 <br><br>
