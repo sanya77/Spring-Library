@@ -4,8 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.travin.spring.entity.Book;
 import ru.travin.spring.entity.Person;
 import ru.travin.spring.service.ServiceDAO;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/people")
@@ -29,8 +32,6 @@ public class PersonController {
     public String show(@PathVariable("id") int id, Model model){
         model.addAttribute("person", serviceDAO.getPerson(id));
         model.addAttribute("books", serviceDAO.getBookIdPerson(id));
-
-//        serviceDAO.testNPlus1();
         return "person/show-person";
     }
 

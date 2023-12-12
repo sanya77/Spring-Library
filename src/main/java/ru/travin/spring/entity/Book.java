@@ -1,7 +1,11 @@
 package ru.travin.spring.entity;
 
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.FetchProfile;
+
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Book")
@@ -71,14 +75,4 @@ public class Book {
         return null;
     }
 
-    @Override
-    public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", nameBook='" + nameBook + '\'' +
-                ", author='" + author + '\'' +
-                ", releaseBook=" + releaseBook +
-                ", person=" + person +
-                '}';
-    }
 }

@@ -82,15 +82,10 @@ public class ServiceDAOImpl implements ServiceDAO {
         bookDAO.deleteBook(id);
     }
 
-    //    @Override
-//    @Transactional
-//    public Object testNPlus1() {
-//    personDAO.testNPlus1();
-//        return null;
-//    }
+
     @Override
     @Transactional
     public List<Book> getBookIdPerson(int id) {
-    return personDAO.getBookIdPerson(id);
+        return personDAO.getBookIdPerson(id);
     }
 }

@@ -1,8 +1,15 @@
 package ru.travin.spring.entity;
 
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.FetchProfile;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+@FetchProfile(name = "withBook", fetchOverrides = {
+        @FetchProfile.FetchOverride(entity = Person.class, association = "books", mode = FetchMode.JOIN)
+})
 
 @Entity
 @Table(name = "Person")
@@ -81,14 +88,7 @@ public class Person {
         this.books = books;
     }
 
-    @Override
-    public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", age=" + age +
-                ", books=" + books +
-                '}';
-    }
+
+
+
 }

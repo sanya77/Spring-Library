@@ -7,12 +7,13 @@ import org.springframework.stereotype.Component;
 import ru.travin.spring.entity.Book;
 import ru.travin.spring.entity.Person;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class PersonDAOImpl implements PersonDAO {
 
-    @Autowired
+
     private final SessionFactory sessionFactory;
 
     @Autowired
@@ -55,16 +56,12 @@ public class PersonDAOImpl implements PersonDAO {
         session.delete(session.get(Person.class, id));
     }
 
-public List<Book> getBookIdPerson(int id){
+    public List<Book> getBookIdPerson(int id) {
         Session session = sessionFactory.getCurrentSession();
+        session.enableFetchProfile("withBook");
 
-//        List<Person> personList = session.createQuery("select p from Person p LEFT JOIN FETCH p.books", Person.class).getResultList();
-        List<Book> bookList = session.createQuery("select b from Book b LEFT JOIN FETCH b.person", Book.class).getResultList();
-        Person result = null;
-        for(Book book : bookList){
-            result = book.getPerson();
-        }
-        return result.getBooks();
-}
+        Person person = session.get(Person.class, id);
+        return person.books;
+    }
 
 }
