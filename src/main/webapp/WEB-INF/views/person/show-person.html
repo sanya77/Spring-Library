@@ -20,7 +20,7 @@
         <tr th:text="${book.getNameBook() + ', ' + book.getAuthor() + ', ' + book.getReleaseBook()}"></tr>
     </table>
 </div>
-
+<hr>
 
 <p th:text="${'Имя: ' + person.getName()}">VALUE></p>
 <p th:text="${'Фамилия: ' + person.getSurname()}">VALUE</p>
@@ -31,6 +31,11 @@
 <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
 <input type="submit" value="DELETE"/>
 </form>
+<br>
+<div>
+    <a th:href="@{/people/all}"><input type="submit" value="Назад"></a>
+</div>
+
 
 </body>
 </html>

@@ -9,6 +9,7 @@ import ru.travin.spring.entity.Book;
 import ru.travin.spring.entity.Person;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ServiceDAOImpl implements ServiceDAO {
@@ -87,5 +88,20 @@ public class ServiceDAOImpl implements ServiceDAO {
     @Transactional
     public List<Book> getBookIdPerson(int id) {
         return personDAO.getBookIdPerson(id);
+    }
+    @Override
+    @Transactional
+    public Person getBookPerson(int id){
+        return bookDAO.getBookPerson(id);
+    }
+    @Override
+    @Transactional
+    public void deletePersonForBook(int id){
+        bookDAO.deletePersonForBook(id);
+    }
+    @Override
+    @Transactional
+    public void addBookForPerson(int id, Person selectedPerson){
+        bookDAO.addBookForPerson(id, selectedPerson);
     }
 }

@@ -7,6 +7,10 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
+@FetchProfile(name = "withPerson", fetchOverrides = {
+        @FetchProfile.FetchOverride(entity = Book.class, association = "person", mode = FetchMode.JOIN)
+})
+
 @Entity
 @Table(name = "Book")
 public class Book {

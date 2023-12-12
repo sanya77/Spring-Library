@@ -8,6 +8,8 @@ import ru.travin.spring.entity.Book;
 import ru.travin.spring.entity.Person;
 import ru.travin.spring.service.ServiceDAO;
 
+import java.util.Optional;
+
 
 @Controller
 @RequestMapping("/book")
@@ -32,13 +34,9 @@ public class BookController {
     public String getBook(@PathVariable("id") int id, Model model, @ModelAttribute("person") Person person) {
 
         model.addAttribute("book", serviceDAO.getBook(id));
-//        Optional<Person> bookOwner = serviceDAO.getBookOwner(id);
-//        if(bookOwner.isPresent()){
-//            model.addAttribute("owner", bookOwner.get());
-//        }else{
-//            model.addAttribute("people", serviceDAO.getAllBook());
-//        }
-//        Optional<Person> bookOwner = serviceDAO.getBookOwner(id);
+        model.addAttribute("bookPerson", serviceDAO.getBookPerson(id));
+        model.addAttribute("AllPeople", serviceDAO.getAllPerson());
+
         return "book/show-book";
     }
 
@@ -72,17 +70,17 @@ public class BookController {
         serviceDAO.deleteBook(id);
         return "redirect:/book";
     }
-//    // удаляет книгу с человека
-//    @PatchMapping("/{id}/release")
-//    public String release(@PathVariable("id") int id){
-//        serviceDAO.release(id);
-//        return "redirect:/book" + id;
-//    }
-//    // назначает книгу для человека
-//    @PatchMapping("/{id}/assign")
-//    public String assign(@PathVariable("id") int id, @ModelAttribute("person") Person selectedPerson){
-//        serviceDAO.assign(id, selectedPerson);
-//        return "redirect:/book" + id;
-//    }
+    // удаляет книгу с человека
+    @PatchMapping("/{id}/deletePersonForBook")
+    public String deletePersonForBook(@PathVariable("id") int id){
+        serviceDAO.deletePersonForBook(id);
+        return "redirect:/book/" + id;
+    }
+    // назначает книгу для человека
+    @PatchMapping("/{id}/addBookForPerson")
+    public String addBookForPerson(@PathVariable("id") int id, @ModelAttribute("person") Person selectedPerson){
+        serviceDAO.addBookForPerson(id, selectedPerson);
+        return "redirect:/book/" + id;
+    }
 }
 

@@ -4,6 +4,7 @@ import ru.travin.spring.entity.Book;
 import ru.travin.spring.entity.Person;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ServiceDAO {
 
@@ -24,4 +25,9 @@ public interface ServiceDAO {
 
     public void deleteBook(int id);
 
+    public Person getBookPerson(int id);
+
+    public void deletePersonForBook(int id);
+
+    public void addBookForPerson(int id, Person selectedPerson);
 }
