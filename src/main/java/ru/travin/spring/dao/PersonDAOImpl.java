@@ -55,7 +55,7 @@ public class PersonDAOImpl implements PersonDAO {
 
         session.delete(session.get(Person.class, id));
     }
-
+    // метод реализации показала книг для каждого читателя
     public List<Book> getBookIdPerson(int id) {
         Session session = sessionFactory.getCurrentSession();
         session.enableFetchProfile("withBook");
