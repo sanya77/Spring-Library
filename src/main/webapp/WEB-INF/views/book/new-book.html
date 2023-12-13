@@ -10,12 +10,15 @@
 <form th:method="POST" th:action="@{/book/addBook}" th:object="${book}">
     <label for="namebook">Введите название книги</label>
     <input type="text" th:field="*{nameBook}" id="namebook"/>
+    <div style="color: red" th:if="${#fields.hasErrors('nameBook')}" th:errors="*{nameBook}"></div>
     <br>
     <label for="author">Введите автора книги</label>
     <input type="text" th:field="*{author}" id="author"/>
+    <div style="color: red" th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></div>
     <br>
     <label for="releasebook">Введите год издания книги</label>
     <input type="text" th:field="*{releaseBook}" id="releasebook"/>
+    <div style="color: red" th:if="${#fields.hasErrors('releaseBook')}" th:errors="*{releaseBook}"></div>
     <br>
     <input type="submit" value="Create!">
 

@@ -4,9 +4,9 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.FetchProfile;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 @FetchProfile(name = "withBook", fetchOverrides = {
         @FetchProfile.FetchOverride(entity = Person.class, association = "books", mode = FetchMode.JOIN)
 })
@@ -20,10 +20,15 @@ public class Person {
     private int id;
 
     @Column(name = "name")
+    @NotBlank(message = "Поле не должно быть пустым")
+    @Size(min = 2, message = "Минимальная длина имени 2 символа")
     private String name;
     @Column(name = "surname")
+    @NotBlank(message = "Поле не должно быть пустым")
+    @Size(min = 2, message = "Минимальная длина фамилии 2 символа")
     private String surname;
     @Column(name = "age")
+    @Min(value = 16, message = "Минимальный возраст читателя 16 лет")
     private int age;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
     public List<Book> books;

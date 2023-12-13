@@ -3,11 +3,13 @@ package ru.travin.spring.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.travin.spring.entity.Book;
 import ru.travin.spring.entity.Person;
 import ru.travin.spring.service.ServiceDAO;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -41,7 +43,10 @@ public class PersonController {
     }
 
     @PostMapping("/add")
-    public String addPerson(@ModelAttribute("person") Person person){
+    public String addPerson(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "person/people-new";
+        }
     serviceDAO.savePerson(person);
     return "redirect:/people/all";
     }

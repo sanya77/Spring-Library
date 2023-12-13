@@ -3,10 +3,13 @@ package ru.travin.spring.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.travin.spring.entity.Book;
 import ru.travin.spring.entity.Person;
 import ru.travin.spring.service.ServiceDAO;
+
+import javax.validation.Valid;
 
 
 @Controller
@@ -32,10 +35,11 @@ public class BookController {
     public String getBook(@PathVariable("id") int id, Model model, @ModelAttribute("person") Person person) {
 
         model.addAttribute("book", serviceDAO.getBook(id));
-
+        Person bookPerson = serviceDAO.getBookPerson(id);
+        if (bookPerson == null) {
+            model.addAttribute("AllPeople", serviceDAO.getAllPerson());
+        }
         model.addAttribute("bookPerson", serviceDAO.getBookPerson(id));
-
-        model.addAttribute("AllPeople", serviceDAO.getAllPerson());
 
         return "book/show-book";
     }
@@ -46,7 +50,10 @@ public class BookController {
     }
 
     @PostMapping("/addBook")
-    public String addBook(@ModelAttribute("book") Book book) {
+    public String addBook(@ModelAttribute("book") @Valid Book book, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            return "book/new-book";
+        }
         serviceDAO.saveBook(book);
 
         return "redirect:/book";

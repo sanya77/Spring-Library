@@ -4,6 +4,7 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.FetchProfile;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,10 +20,15 @@ public class Book {
     @Column(name = "id")
     private int id;
     @Column(name = "namebook")
+    @NotBlank(message = "Поле не должно быть пустым")
+    @Size(min = 2, message = "Минимальное название книги 2 символа")
     private String nameBook;
     @Column(name = "author")
+    @NotBlank(message = "Поле не должно быть пустым")
+    @Size(min = 2, message = "Минимальная длина автора 2 символа")
     private String author;
     @Column(name = "releasebook")
+    @Min(value = 1500,message = "Минимальный год выпуска книги 1500")
     private int releaseBook;
     @ManyToOne
     @JoinColumn(name = "person_id", referencedColumnName = "id")
