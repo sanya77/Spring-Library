@@ -34,8 +34,12 @@ public class BookController {
     public String getBook(@PathVariable("id") int id, Model model, @ModelAttribute("person") Person person) {
 
         model.addAttribute("book", serviceDAO.getBook(id));
+        Person bookPerson = serviceDAO.getBookPerson(id);
+        if(bookPerson == null){
+            model.addAttribute("AllPeople", serviceDAO.getAllPerson());
+        }
         model.addAttribute("bookPerson", serviceDAO.getBookPerson(id));
-        model.addAttribute("AllPeople", serviceDAO.getAllPerson());
+
 
         return "book/show-book";
     }
