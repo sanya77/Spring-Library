@@ -53,13 +53,17 @@ public class PersonController {
 
 
     @GetMapping("/{id}/edit")
-    public String edit(@PathVariable("id") int id, Model model){
+    public String edit(@PathVariable("id")  int id, Model model){
+
         model.addAttribute("person", serviceDAO.getPerson(id));
         return "person/edit-people";
     }
 
     @PatchMapping("/{id}")
-    public String updatePerson(@ModelAttribute("person") Person person, @PathVariable("id") int id){
+    public String updatePerson(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult, @PathVariable("id") int id){
+        if(bindingResult.hasErrors()){
+            return "person/edit-people";
+        }
         serviceDAO.updatePerson(id,person);
         return "redirect:/people/all";
     }

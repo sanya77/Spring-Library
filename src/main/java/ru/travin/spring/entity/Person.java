@@ -30,7 +30,7 @@ public class Person {
     @Column(name = "age")
     @Min(value = 16, message = "Минимальный возраст читателя 16 лет")
     private int age;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
+    @OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "person")
     public List<Book> books;
 
     public Person(int id, String name, String surname, int age) {
