@@ -8,7 +8,8 @@
 <p th:text="${book.getNameBook() + ', ' + book.getAuthor() + ', ' + book.getReleaseBook()}"></p>
 
 <div th:if="${bookPerson}">
-    <span>Книга сейчас у: </span> <span th:text="${bookPerson.getName() + ' ' + bookPerson.getSurname()}">Person name</span>
+    <span>Книга сейчас у: </span> <span
+        th:text="${bookPerson.getName() + ' ' + bookPerson.getSurname()}">Person name</span>
     <form th:method="PATCH" th:action="@{/book/{id}/deletePersonForBook(id=${book.getId()})}">
         <input type="submit" value="Освободить книгу">
     </form>
@@ -38,7 +39,7 @@
 <form th:method="DELETE" th:action="@{/book/{id}(id=${book.getId()})}">
     <input type="submit" value="DELETE"/>
 </form>
-
+<br>
 <div>
     <a th:href="@{/book}"><input type="submit" value="Назад"></a>
 </div>

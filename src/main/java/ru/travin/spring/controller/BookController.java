@@ -8,8 +8,6 @@ import ru.travin.spring.entity.Book;
 import ru.travin.spring.entity.Person;
 import ru.travin.spring.service.ServiceDAO;
 
-import java.util.Optional;
-
 
 @Controller
 @RequestMapping("/book")
@@ -34,7 +32,9 @@ public class BookController {
     public String getBook(@PathVariable("id") int id, Model model, @ModelAttribute("person") Person person) {
 
         model.addAttribute("book", serviceDAO.getBook(id));
+
         model.addAttribute("bookPerson", serviceDAO.getBookPerson(id));
+
         model.addAttribute("AllPeople", serviceDAO.getAllPerson());
 
         return "book/show-book";
@@ -66,19 +66,21 @@ public class BookController {
     }
 
     @DeleteMapping("/{id}")
-    public String deleteBook(@PathVariable("id") int id){
+    public String deleteBook(@PathVariable("id") int id) {
         serviceDAO.deleteBook(id);
         return "redirect:/book";
     }
+
     // удаляет книгу с человека
     @PatchMapping("/{id}/deletePersonForBook")
-    public String deletePersonForBook(@PathVariable("id") int id){
+    public String deletePersonForBook(@PathVariable("id") int id) {
         serviceDAO.deletePersonForBook(id);
         return "redirect:/book/" + id;
     }
+
     // назначает книгу для человека
     @PatchMapping("/{id}/addBookForPerson")
-    public String addBookForPerson(@PathVariable("id") int id, @ModelAttribute("person") Person selectedPerson){
+    public String addBookForPerson(@PathVariable("id") int id, @ModelAttribute("person") Person selectedPerson) {
         serviceDAO.addBookForPerson(id, selectedPerson);
         return "redirect:/book/" + id;
     }
