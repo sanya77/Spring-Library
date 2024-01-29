@@ -13,6 +13,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/people")
 public class PersonController {
+    //новая фича
 
     private ServiceDAO serviceDAO;
     @Autowired
